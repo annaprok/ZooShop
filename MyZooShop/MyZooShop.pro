@@ -16,12 +16,23 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     autorisationwindow.cpp \
-    login.cpp
+    login.cpp \
+    adminwindow.cpp \
+    sellerwindow.cpp \
+    registerdialog.cpp \
+    storage.cpp
 
 HEADERS  += mainwindow.h \
     autorisationwindow.h \
-    login.h
+    login.h \
+    adminwindow.h \
+    sellerwindow.h \
+    registerdialog.h \
+    storage.h
 
 FORMS    += mainwindow.ui \
     autorisationwindow.ui \
-    login.ui
+    login.ui \
+    adminwindow.ui \
+    sellerwindow.ui \
+    registerdialog.ui

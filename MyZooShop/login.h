@@ -16,13 +16,20 @@ public:
     ~LogIn();
     QString userName() const;
     QString password() const;
-protected:
-    void showEvent(QShowEvent * pEvent);
+    QString user() const;
+
+private slots:
+    void AddDialog::on_pushButton_clicked();
+    
+    void AddDialog::onButtonSend();
+    
+    void on_login_edit_textChanged(const QString &arg1);
+    
+    void on_password_edit_textChanged(const QString &arg1);
+    
 private:
     Ui::LogIn *ui;
 
-    QLineEdit *m_ptxtUserName;
-    QLineEdit *m_ptxtPassword;
 };
 
 #endif // LOGIN_H

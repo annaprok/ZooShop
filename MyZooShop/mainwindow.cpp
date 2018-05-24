@@ -13,6 +13,7 @@
 #include <QTextDocument>              //    создания класса QTextDocument
 #include <QTextCodec>                   //     создания кодеков для отображения  текста
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
