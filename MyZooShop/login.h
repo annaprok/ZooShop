@@ -14,9 +14,16 @@ class LogIn : public QDialog
 public:
     explicit LogIn(QWidget *parent = 0);
     ~LogIn();
+    void setUsername( QString& username );
+    void setPassword( QString& password );
+    void setUsernamesList( const QStringList& usernames );
     QString userName() const;
     QString password() const;
     QString user() const;
+signals:
+    void acceptLogin( QString& username, QString& password, int& indexNumber );
+public slots:
+    void slotAcceptLogin();
 
 private slots:
     void AddDialog::on_pushButton_clicked();

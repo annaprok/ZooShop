@@ -8,16 +8,17 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+Storage storage(3000,(QHostAddress)"127.0.0.1");
     //QTextCodec::setCodecForTr(QTextCodec::codecForLocale());
 
         MainWindow w;
+        w.storage=&storage;
         LogIn login;
         do
         {
-            if (login.exec() == LogIn::Rejected)
+            if (login.exec() != LogIn::Accepted)
                 return 0;
-            if(login.user()=="admin"){
+            else if(login.user()=="admin"){
                 AdminWindow w;
                 w.show();
             }

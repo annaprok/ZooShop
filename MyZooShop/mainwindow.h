@@ -7,6 +7,16 @@
 #include <QtSql/QSqlRelationalTableModel> //оздание реляционной таблицы модели
 #include <QApplication>   //создание аппликации
 #include <QDataWidgetMapper>
+#include <QTcpServer>
+#include <QTcpSocket>
+#include <QObject>
+#include <QDebug>
+#include <iostream>
+#include "storage.h"
+#include <QMainWindow>
+#include <QList>
+#include <QListWidgetItem>
+#include <QMessageBox>
 
 namespace Ui {
 class MainWindow;
@@ -15,12 +25,17 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     //create storage
-    QString path="path";
-    Storage*_storage=new Storage(path);
-    if(!_storage->open()){
-        QMessage
-    }
-    QList<User*> users=_storage->getAllUsers();
+//    QString path="path";
+//    Storage*_storage=new Storage(path);
+//    if(!_storage->open()){
+//        QMessage
+//    }
+//    QList<User*> users=_storage->getAllUsers();
+    int PORT=3000;
+    QTcpSocket*client;
+    QHostAddress serverAddress;
+    Storage *storage;
+    int status;
 
 
     Q_OBJECT
