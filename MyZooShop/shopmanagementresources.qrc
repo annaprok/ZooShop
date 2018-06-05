@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Icons/Button-Close-icon.png</file>
+        <file>Icons/Misc-New-Database-icon.png</file>
+        <file>Icons/Pencil-icon.png</file>
+        <file>addanimalform.cpp</file>
+        <file>addanimalform.h</file>
+        <file>addanimalform.ui</file>
+        <file>shopmanagementresources.qrc</file>
+        <file>MyZooShop.pro</file>
+        <file>main.cpp</file>
+        <file>mainwindow.cpp</file>
+        <file>mainwindow.h</file>
+        <file>mainwindow.ui</file>
+        <file>Icons/database-remove-icon.png</file>
+        <file>Icons/QtProject-creator-icon.png</file>
+        <file>Icons/Very-Basic-About-icon.png</file>
+    </qresource>
+</RCC>
