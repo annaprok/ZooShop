@@ -9,6 +9,11 @@
 #include "composer.h"
 #include "composition.h"
 #include <QStringList>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QtSql/QSqlDatabase>          // создания или подключение базы
+#include <QtSql/QSqlError>               // ошибок подключения
+#include <QtSql/QSqlTableModel>
 using namespace std;
 
 
@@ -70,7 +75,8 @@ public:
         FN_GET_STUDENTS,
         FN_INSERT_STUDENT,
         FN_UPDATE_STUDENT,
-        FN_DELETE_STUDENT
+        FN_DELETE_STUDENT,
+        FN_SHOW_ANIMALS
     } FuncName;
     QString toString(FuncName fn);
     FunctionName();
@@ -91,6 +97,9 @@ class COMMONSHARED_EXPORT Request
     Request();
 };
 
+
+
+
 class COMMONSHARED_EXPORT Response
 {
  public:
@@ -105,6 +114,47 @@ class COMMONSHARED_EXPORT Response
 
 
 
+
+
+////////////////////////////////////////////////////////////////////
+/// \brief The ZooRequest class
+class COMMONSHARED_EXPORT ZooFuncName
+{
+public:
+    typedef enum {
+        FN_NONE,
+        FN_SHOW_ANIMALS
+    } FuncName;
+    QString toString(FuncName fn);
+    ZooFuncName();
+};
+
+
+class COMMONSHARED_EXPORT ZooRequest
+{
+ public:
+    FunctionName::FuncName functionName;
+    int id;
+    QString path;
+    //Composer composer;
+    //QString fileName;
+    void clear(ZooRequest & req);
+    //ZooRequest();
+};
+class COMMONSHARED_EXPORT ZooResponse
+{
+ public:
+    int status;
+    int id;
+    QSqlTableModel model;
+    //QStringList  files;
+    //QList<Composer*> composers;
+    ZooResponse();
+};
+
+
+
+/////////////////////////////////////////////////
 class COMMONSHARED_EXPORT Common
 {
 
@@ -117,8 +167,14 @@ public:
     QString serializeRequest(Request request);
     Request * deserializeRequest(QString text);
     QString serializeResponse(Response * response);
+    ///////////////////////////////////////////////////////////////
+    ZooResponse * deserializeZooResponse(QString  text);
+    QString serializeZooRequest(ZooRequest request);
+    ZooRequest * deserializeZooRequest(QString text);
+    QString serializeZooResponse(ZooResponse * response);
+    QString serializeModel(QSqlTableModel *m_model);
+    QSqlTableModel * deserializeModel(QString &str);
 };
-
 
 #endif // COMMON_H
 #endif // COMMON_H

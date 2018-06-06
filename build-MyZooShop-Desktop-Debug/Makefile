@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -m64 -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -m64 -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../MyZooShop -I. -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtSql -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64
+CXXFLAGS      = -m64 -pipe -std=c++0x -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+INCPATH       = -I../MyZooShop -I. -I../../progbase2/labs/lab6/Common -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtSql -isystem /usr/include/x86_64-linux-gnu/qt5/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64
 QMAKE         = /usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = MyZooShop1.0.0
 DISTDIR = /home/anna/workspace/projects/progbase3/build-MyZooShop-Desktop-Debug/.tmp/MyZooShop1.0.0
 LINK          = g++
 LFLAGS        = -m64
-LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -lQt5Widgets -lQt5Gui -lQt5Sql -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/usr/X11R6/lib64 -L/home/anna/workspace/projects/progbase2/labs/lab6/build-Common-Desktop-Debug -L. -lCommon -Wl,-rpath,/home/anna/workspace/projects/progbase2/labs/lab6/build-Common-Desktop-Debug -Wl,-rpath,. -lQt5Widgets -lQt5Gui -lQt5Sql -lQt5Network -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -53,22 +53,52 @@ SOURCES       = ../MyZooShop/main.cpp \
 		../MyZooShop/autorisationwindow.cpp \
 		../MyZooShop/login.cpp \
 		../MyZooShop/adminwindow.cpp \
-		../MyZooShop/sellerwindow.cpp moc_mainwindow.cpp \
+		../MyZooShop/sellerwindow.cpp \
+		../MyZooShop/registerdialog.cpp \
+		../MyZooShop/storage.cpp \
+		../MyZooShop/md5.cpp \
+		../MyZooShop/client.cpp \
+		../MyZooShop/dbmanager.cpp \
+		../MyZooShop/removeentryform.cpp \
+		../MyZooShop/editentryform.cpp \
+		../MyZooShop/addform.cpp \
+		../MyZooShop/signup.cpp qrc_shopmanagementresources.cpp \
+		moc_mainwindow.cpp \
 		moc_autorisationwindow.cpp \
 		moc_login.cpp \
 		moc_adminwindow.cpp \
-		moc_sellerwindow.cpp
+		moc_sellerwindow.cpp \
+		moc_registerdialog.cpp \
+		moc_removeentryform.cpp \
+		moc_editentryform.cpp \
+		moc_addform.cpp \
+		moc_signup.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		autorisationwindow.o \
 		login.o \
 		adminwindow.o \
 		sellerwindow.o \
+		registerdialog.o \
+		storage.o \
+		md5.o \
+		client.o \
+		dbmanager.o \
+		removeentryform.o \
+		editentryform.o \
+		addform.o \
+		signup.o \
+		qrc_shopmanagementresources.o \
 		moc_mainwindow.o \
 		moc_autorisationwindow.o \
 		moc_login.o \
 		moc_adminwindow.o \
-		moc_sellerwindow.o
+		moc_sellerwindow.o \
+		moc_registerdialog.o \
+		moc_removeentryform.o \
+		moc_editentryform.o \
+		moc_addform.o \
+		moc_signup.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -129,12 +159,34 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../MyZooShop/autorisationwindow.h \
 		../MyZooShop/login.h \
 		../MyZooShop/adminwindow.h \
-		../MyZooShop/sellerwindow.h ../MyZooShop/main.cpp \
+		../MyZooShop/sellerwindow.h \
+		../MyZooShop/registerdialog.h \
+		../MyZooShop/storage.h \
+		../MyZooShop/md5.h \
+		../MyZooShop/common.h \
+		../MyZooShop/common_global.h \
+		../MyZooShop/client.h \
+		../MyZooShop/dbmanager.h \
+		../MyZooShop/addanimaldialog.h \
+		../MyZooShop/removeentryform.h \
+		../MyZooShop/editentryform.h \
+		../MyZooShop/databaseconnection.h \
+		../MyZooShop/addform.h \
+		../MyZooShop/signup.h ../MyZooShop/main.cpp \
 		../MyZooShop/mainwindow.cpp \
 		../MyZooShop/autorisationwindow.cpp \
 		../MyZooShop/login.cpp \
 		../MyZooShop/adminwindow.cpp \
-		../MyZooShop/sellerwindow.cpp
+		../MyZooShop/sellerwindow.cpp \
+		../MyZooShop/registerdialog.cpp \
+		../MyZooShop/storage.cpp \
+		../MyZooShop/md5.cpp \
+		../MyZooShop/client.cpp \
+		../MyZooShop/dbmanager.cpp \
+		../MyZooShop/removeentryform.cpp \
+		../MyZooShop/editentryform.cpp \
+		../MyZooShop/addform.cpp \
+		../MyZooShop/signup.cpp
 QMAKE_TARGET  = MyZooShop
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = MyZooShop
@@ -162,7 +214,7 @@ first: all
 
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h ui_autorisationwindow.h ui_login.h ui_adminwindow.h ui_sellerwindow.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h ui_autorisationwindow.h ui_login.h ui_adminwindow.h ui_sellerwindow.h ui_registerdialog.h ui_editentryform.h ui_removeentryform.h ui_addanimalform.h ui_addform.h ui_signup.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../MyZooShop/MyZooShop.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -222,9 +274,11 @@ Makefile: ../MyZooShop/MyZooShop.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../MyZooShop/MyZooShop.pro \
+		../MyZooShop/shopmanagementresources.qrc \
 		/usr/lib/x86_64-linux-gnu/libQt5Widgets.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Gui.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Sql.prl \
+		/usr/lib/x86_64-linux-gnu/libQt5Network.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Core.prl
 	$(QMAKE) -spec linux-g++-64 CONFIG+=debug -o Makefile ../MyZooShop/MyZooShop.pro
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf:
@@ -284,9 +338,11 @@ Makefile: ../MyZooShop/MyZooShop.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf:
 ../MyZooShop/MyZooShop.pro:
+../MyZooShop/shopmanagementresources.qrc:
 /usr/lib/x86_64-linux-gnu/libQt5Widgets.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Gui.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Sql.prl:
+/usr/lib/x86_64-linux-gnu/libQt5Network.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -spec linux-g++-64 CONFIG+=debug -o Makefile ../MyZooShop/MyZooShop.pro
@@ -302,9 +358,10 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../MyZooShop/mainwindow.h ../MyZooShop/autorisationwindow.h ../MyZooShop/login.h ../MyZooShop/adminwindow.h ../MyZooShop/sellerwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../MyZooShop/main.cpp ../MyZooShop/mainwindow.cpp ../MyZooShop/autorisationwindow.cpp ../MyZooShop/login.cpp ../MyZooShop/adminwindow.cpp ../MyZooShop/sellerwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../MyZooShop/mainwindow.ui ../MyZooShop/autorisationwindow.ui ../MyZooShop/login.ui ../MyZooShop/adminwindow.ui ../MyZooShop/sellerwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../MyZooShop/shopmanagementresources.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents ../MyZooShop/mainwindow.h ../MyZooShop/autorisationwindow.h ../MyZooShop/login.h ../MyZooShop/adminwindow.h ../MyZooShop/sellerwindow.h ../MyZooShop/registerdialog.h ../MyZooShop/storage.h ../MyZooShop/md5.h ../MyZooShop/common.h ../MyZooShop/common_global.h ../MyZooShop/client.h ../MyZooShop/dbmanager.h ../MyZooShop/addanimaldialog.h ../MyZooShop/removeentryform.h ../MyZooShop/editentryform.h ../MyZooShop/databaseconnection.h ../MyZooShop/addform.h ../MyZooShop/signup.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../MyZooShop/main.cpp ../MyZooShop/mainwindow.cpp ../MyZooShop/autorisationwindow.cpp ../MyZooShop/login.cpp ../MyZooShop/adminwindow.cpp ../MyZooShop/sellerwindow.cpp ../MyZooShop/registerdialog.cpp ../MyZooShop/storage.cpp ../MyZooShop/md5.cpp ../MyZooShop/client.cpp ../MyZooShop/dbmanager.cpp ../MyZooShop/removeentryform.cpp ../MyZooShop/editentryform.cpp ../MyZooShop/addform.cpp ../MyZooShop/signup.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../MyZooShop/mainwindow.ui ../MyZooShop/autorisationwindow.ui ../MyZooShop/login.ui ../MyZooShop/adminwindow.ui ../MyZooShop/sellerwindow.ui ../MyZooShop/registerdialog.ui ../MyZooShop/editentryform.ui ../MyZooShop/removeentryform.ui ../MyZooShop/addanimalform.ui ../MyZooShop/addform.ui ../MyZooShop/signup.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -325,31 +382,141 @@ mocables: compiler_moc_header_make_all compiler_moc_source_make_all
 
 check: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_shopmanagementresources.cpp
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_autorisationwindow.cpp moc_login.cpp moc_adminwindow.cpp moc_sellerwindow.cpp
+	-$(DEL_FILE) qrc_shopmanagementresources.cpp
+qrc_shopmanagementresources.cpp: ../MyZooShop/shopmanagementresources.qrc \
+		../MyZooShop/mainwindow.h \
+		../MyZooShop/MyZooShop.pro \
+		../MyZooShop/mainwindow.cpp \
+		../MyZooShop/main.cpp \
+		../MyZooShop/addform.cpp \
+		../MyZooShop/mainwindow.ui \
+		../MyZooShop/addform.h \
+		../MyZooShop/shopmanagementresources.qrc \
+		../MyZooShop/addanimalform.ui \
+		../MyZooShop/Icons/Pencil-icon.png \
+		../MyZooShop/Icons/Very-Basic-About-icon.png \
+		../MyZooShop/Icons/Misc-New-Database-icon.png \
+		../MyZooShop/Icons/database-remove-icon.png \
+		../MyZooShop/Icons/Button-Close-icon.png \
+		../MyZooShop/Icons/QtProject-creator-icon.png \
+		../MyZooShop/storage.h \
+		../MyZooShop/common.h \
+		../MyZooShop/common_global.h \
+		../../progbase2/labs/lab6/Common/composer.h \
+		../../progbase2/labs/lab6/Common/common_global.h \
+		../../progbase2/labs/lab6/Common/composition.h \
+		../MyZooShop/client.h \
+		../MyZooShop/adminwindow.h \
+		../MyZooShop/addform.h \
+		../MyZooShop/editentryform.h \
+		../MyZooShop/databaseconnection.h \
+		../MyZooShop/removeentryform.h \
+		../MyZooShop/login.h \
+		../MyZooShop/md5.h \
+		../MyZooShop/mainwindow.h \
+		../MyZooShop/storage.h \
+		../MyZooShop/common.h \
+		../MyZooShop/common_global.h \
+		../../progbase2/labs/lab6/Common/composer.h \
+		../../progbase2/labs/lab6/Common/common_global.h \
+		../../progbase2/labs/lab6/Common/composition.h \
+		../MyZooShop/client.h \
+		../MyZooShop/adminwindow.h \
+		../MyZooShop/addform.h \
+		../MyZooShop/editentryform.h \
+		../MyZooShop/databaseconnection.h \
+		../MyZooShop/removeentryform.h \
+		../MyZooShop/login.h \
+		../MyZooShop/md5.h \
+		ui_mainwindow.h \
+		../MyZooShop/mainwindow.h \
+		../MyZooShop/storage.h \
+		../MyZooShop/common.h \
+		../MyZooShop/common_global.h \
+		../../progbase2/labs/lab6/Common/composer.h \
+		../../progbase2/labs/lab6/Common/common_global.h \
+		../../progbase2/labs/lab6/Common/composition.h \
+		../MyZooShop/client.h \
+		../MyZooShop/adminwindow.h \
+		../MyZooShop/addform.h \
+		../MyZooShop/editentryform.h \
+		../MyZooShop/databaseconnection.h \
+		../MyZooShop/removeentryform.h \
+		../MyZooShop/login.h \
+		../MyZooShop/md5.h \
+		../MyZooShop/sellerwindow.h \
+		../MyZooShop/addform.h \
+		../MyZooShop/editentryform.h \
+		../MyZooShop/databaseconnection.h \
+		../MyZooShop/removeentryform.h \
+		ui_addform.h \
+		../MyZooShop/editentryform.h \
+		../MyZooShop/databaseconnection.h \
+		../MyZooShop/removeentryform.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name shopmanagementresources ../MyZooShop/shopmanagementresources.qrc -o qrc_shopmanagementresources.cpp
+
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_autorisationwindow.cpp moc_login.cpp moc_adminwindow.cpp moc_sellerwindow.cpp moc_registerdialog.cpp moc_removeentryform.cpp moc_editentryform.cpp moc_addform.cpp moc_signup.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_autorisationwindow.cpp moc_login.cpp moc_adminwindow.cpp moc_sellerwindow.cpp
-moc_mainwindow.cpp: ../MyZooShop/mainwindow.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/anna/workspace/projects/progbase3/MyZooShop -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MyZooShop/mainwindow.h -o moc_mainwindow.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_autorisationwindow.cpp moc_login.cpp moc_adminwindow.cpp moc_sellerwindow.cpp moc_registerdialog.cpp moc_removeentryform.cpp moc_editentryform.cpp moc_addform.cpp moc_signup.cpp
+moc_mainwindow.cpp: ../MyZooShop/storage.h \
+		../MyZooShop/common.h \
+		../MyZooShop/common_global.h \
+		../../progbase2/labs/lab6/Common/composer.h \
+		../../progbase2/labs/lab6/Common/common_global.h \
+		../../progbase2/labs/lab6/Common/composition.h \
+		../MyZooShop/client.h \
+		../MyZooShop/adminwindow.h \
+		../MyZooShop/addform.h \
+		../MyZooShop/editentryform.h \
+		../MyZooShop/databaseconnection.h \
+		../MyZooShop/removeentryform.h \
+		../MyZooShop/login.h \
+		../MyZooShop/md5.h \
+		../MyZooShop/mainwindow.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/anna/workspace/projects/progbase3/MyZooShop -I/home/anna/workspace/projects/progbase2/labs/lab6/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MyZooShop/mainwindow.h -o moc_mainwindow.cpp
 
 moc_autorisationwindow.cpp: ../MyZooShop/autorisationwindow.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/anna/workspace/projects/progbase3/MyZooShop -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MyZooShop/autorisationwindow.h -o moc_autorisationwindow.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/anna/workspace/projects/progbase3/MyZooShop -I/home/anna/workspace/projects/progbase2/labs/lab6/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MyZooShop/autorisationwindow.h -o moc_autorisationwindow.cpp
 
-moc_login.cpp: ../MyZooShop/login.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/anna/workspace/projects/progbase3/MyZooShop -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MyZooShop/login.h -o moc_login.cpp
+moc_login.cpp: ../MyZooShop/md5.h \
+		../MyZooShop/login.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/anna/workspace/projects/progbase3/MyZooShop -I/home/anna/workspace/projects/progbase2/labs/lab6/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MyZooShop/login.h -o moc_login.cpp
 
-moc_adminwindow.cpp: ../MyZooShop/adminwindow.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/anna/workspace/projects/progbase3/MyZooShop -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MyZooShop/adminwindow.h -o moc_adminwindow.cpp
+moc_adminwindow.cpp: ../MyZooShop/addform.h \
+		../MyZooShop/editentryform.h \
+		../MyZooShop/databaseconnection.h \
+		../MyZooShop/removeentryform.h \
+		../MyZooShop/adminwindow.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/anna/workspace/projects/progbase3/MyZooShop -I/home/anna/workspace/projects/progbase2/labs/lab6/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MyZooShop/adminwindow.h -o moc_adminwindow.cpp
 
 moc_sellerwindow.cpp: ../MyZooShop/sellerwindow.h
-	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/anna/workspace/projects/progbase3/MyZooShop -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MyZooShop/sellerwindow.h -o moc_sellerwindow.cpp
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/anna/workspace/projects/progbase3/MyZooShop -I/home/anna/workspace/projects/progbase2/labs/lab6/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MyZooShop/sellerwindow.h -o moc_sellerwindow.cpp
+
+moc_registerdialog.cpp: ../MyZooShop/registerdialog.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/anna/workspace/projects/progbase3/MyZooShop -I/home/anna/workspace/projects/progbase2/labs/lab6/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MyZooShop/registerdialog.h -o moc_registerdialog.cpp
+
+moc_removeentryform.cpp: ../MyZooShop/removeentryform.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/anna/workspace/projects/progbase3/MyZooShop -I/home/anna/workspace/projects/progbase2/labs/lab6/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MyZooShop/removeentryform.h -o moc_removeentryform.cpp
+
+moc_editentryform.cpp: ../MyZooShop/editentryform.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/anna/workspace/projects/progbase3/MyZooShop -I/home/anna/workspace/projects/progbase2/labs/lab6/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MyZooShop/editentryform.h -o moc_editentryform.cpp
+
+moc_addform.cpp: ../MyZooShop/editentryform.h \
+		../MyZooShop/databaseconnection.h \
+		../MyZooShop/removeentryform.h \
+		../MyZooShop/addform.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/anna/workspace/projects/progbase3/MyZooShop -I/home/anna/workspace/projects/progbase2/labs/lab6/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MyZooShop/addform.h -o moc_addform.cpp
+
+moc_signup.cpp: ../MyZooShop/signup.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64 -I/home/anna/workspace/projects/progbase3/MyZooShop -I/home/anna/workspace/projects/progbase2/labs/lab6/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSql -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../MyZooShop/signup.h -o moc_signup.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_autorisationwindow.h ui_login.h ui_adminwindow.h ui_sellerwindow.h
+compiler_uic_make_all: ui_mainwindow.h ui_autorisationwindow.h ui_login.h ui_adminwindow.h ui_sellerwindow.h ui_registerdialog.h ui_editentryform.h ui_removeentryform.h ui_addanimalform.h ui_addform.h ui_signup.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_autorisationwindow.h ui_login.h ui_adminwindow.h ui_sellerwindow.h
+	-$(DEL_FILE) ui_mainwindow.h ui_autorisationwindow.h ui_login.h ui_adminwindow.h ui_sellerwindow.h ui_registerdialog.h ui_editentryform.h ui_removeentryform.h ui_addanimalform.h ui_addform.h ui_signup.h
 ui_mainwindow.h: ../MyZooShop/mainwindow.ui
 	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../MyZooShop/mainwindow.ui -o ui_mainwindow.h
 
@@ -365,23 +532,67 @@ ui_adminwindow.h: ../MyZooShop/adminwindow.ui
 ui_sellerwindow.h: ../MyZooShop/sellerwindow.ui
 	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../MyZooShop/sellerwindow.ui -o ui_sellerwindow.h
 
+ui_registerdialog.h: ../MyZooShop/registerdialog.ui
+	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../MyZooShop/registerdialog.ui -o ui_registerdialog.h
+
+ui_editentryform.h: ../MyZooShop/editentryform.ui
+	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../MyZooShop/editentryform.ui -o ui_editentryform.h
+
+ui_removeentryform.h: ../MyZooShop/removeentryform.ui
+	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../MyZooShop/removeentryform.ui -o ui_removeentryform.h
+
+ui_addanimalform.h: ../MyZooShop/addanimalform.ui
+	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../MyZooShop/addanimalform.ui -o ui_addanimalform.h
+
+ui_addform.h: ../MyZooShop/addform.ui
+	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../MyZooShop/addform.ui -o ui_addform.h
+
+ui_signup.h: ../MyZooShop/signup.ui
+	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../MyZooShop/signup.ui -o ui_signup.h
+
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
 compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
 main.o: ../MyZooShop/main.cpp ../MyZooShop/mainwindow.h \
+		../MyZooShop/storage.h \
+		../MyZooShop/common.h \
+		../MyZooShop/common_global.h \
+		../../progbase2/labs/lab6/Common/composer.h \
+		../../progbase2/labs/lab6/Common/common_global.h \
+		../../progbase2/labs/lab6/Common/composition.h \
+		../MyZooShop/client.h \
 		../MyZooShop/adminwindow.h \
-		../MyZooShop/sellerwindow.h \
-		../MyZooShop/login.h
+		../MyZooShop/addform.h \
+		../MyZooShop/editentryform.h \
+		../MyZooShop/databaseconnection.h \
+		../MyZooShop/removeentryform.h \
+		../MyZooShop/login.h \
+		../MyZooShop/md5.h \
+		../MyZooShop/sellerwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../MyZooShop/main.cpp
 
 mainwindow.o: ../MyZooShop/mainwindow.cpp ../MyZooShop/mainwindow.h \
+		../MyZooShop/storage.h \
+		../MyZooShop/common.h \
+		../MyZooShop/common_global.h \
+		../../progbase2/labs/lab6/Common/composer.h \
+		../../progbase2/labs/lab6/Common/common_global.h \
+		../../progbase2/labs/lab6/Common/composition.h \
+		../MyZooShop/client.h \
+		../MyZooShop/adminwindow.h \
+		../MyZooShop/addform.h \
+		../MyZooShop/editentryform.h \
+		../MyZooShop/databaseconnection.h \
+		../MyZooShop/removeentryform.h \
+		../MyZooShop/login.h \
+		../MyZooShop/md5.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../MyZooShop/mainwindow.cpp
 
@@ -390,16 +601,83 @@ autorisationwindow.o: ../MyZooShop/autorisationwindow.cpp ../MyZooShop/autorisat
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o autorisationwindow.o ../MyZooShop/autorisationwindow.cpp
 
 login.o: ../MyZooShop/login.cpp ../MyZooShop/login.h \
+		../MyZooShop/md5.h \
+		../MyZooShop/adminwindow.h \
+		../MyZooShop/addform.h \
+		../MyZooShop/editentryform.h \
+		../MyZooShop/databaseconnection.h \
+		../MyZooShop/removeentryform.h \
 		ui_login.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o login.o ../MyZooShop/login.cpp
 
 adminwindow.o: ../MyZooShop/adminwindow.cpp ../MyZooShop/adminwindow.h \
+		../MyZooShop/addform.h \
+		../MyZooShop/editentryform.h \
+		../MyZooShop/databaseconnection.h \
+		../MyZooShop/removeentryform.h \
 		ui_adminwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o adminwindow.o ../MyZooShop/adminwindow.cpp
 
 sellerwindow.o: ../MyZooShop/sellerwindow.cpp ../MyZooShop/sellerwindow.h \
 		ui_sellerwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sellerwindow.o ../MyZooShop/sellerwindow.cpp
+
+registerdialog.o: ../MyZooShop/registerdialog.cpp ../MyZooShop/registerdialog.h \
+		ui_registerdialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o registerdialog.o ../MyZooShop/registerdialog.cpp
+
+storage.o: ../MyZooShop/storage.cpp ../MyZooShop/storage.h \
+		../MyZooShop/common.h \
+		../MyZooShop/common_global.h \
+		../../progbase2/labs/lab6/Common/composer.h \
+		../../progbase2/labs/lab6/Common/common_global.h \
+		../../progbase2/labs/lab6/Common/composition.h \
+		../MyZooShop/client.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o storage.o ../MyZooShop/storage.cpp
+
+md5.o: ../MyZooShop/md5.cpp ../MyZooShop/md5.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o md5.o ../MyZooShop/md5.cpp
+
+client.o: ../MyZooShop/client.cpp ../MyZooShop/client.h \
+		../MyZooShop/common.h \
+		../MyZooShop/common_global.h \
+		../../progbase2/labs/lab6/Common/composer.h \
+		../../progbase2/labs/lab6/Common/common_global.h \
+		../../progbase2/labs/lab6/Common/composition.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o client.o ../MyZooShop/client.cpp
+
+dbmanager.o: ../MyZooShop/dbmanager.cpp ../MyZooShop/dbmanager.h \
+		../MyZooShop/common.h \
+		../MyZooShop/common_global.h \
+		../../progbase2/labs/lab6/Common/composer.h \
+		../../progbase2/labs/lab6/Common/common_global.h \
+		../../progbase2/labs/lab6/Common/composition.h \
+		../MyZooShop/client.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dbmanager.o ../MyZooShop/dbmanager.cpp
+
+removeentryform.o: ../MyZooShop/removeentryform.cpp ../MyZooShop/removeentryform.h \
+		ui_removeentryform.h \
+		../MyZooShop/databaseconnection.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o removeentryform.o ../MyZooShop/removeentryform.cpp
+
+editentryform.o: ../MyZooShop/editentryform.cpp ../MyZooShop/editentryform.h \
+		ui_editentryform.h \
+		../MyZooShop/databaseconnection.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o editentryform.o ../MyZooShop/editentryform.cpp
+
+addform.o: ../MyZooShop/addform.cpp ../MyZooShop/addform.h \
+		../MyZooShop/editentryform.h \
+		../MyZooShop/databaseconnection.h \
+		../MyZooShop/removeentryform.h \
+		ui_addform.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o addform.o ../MyZooShop/addform.cpp
+
+signup.o: ../MyZooShop/signup.cpp ../MyZooShop/signup.h \
+		ui_signup.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o signup.o ../MyZooShop/signup.cpp
+
+qrc_shopmanagementresources.o: qrc_shopmanagementresources.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_shopmanagementresources.o qrc_shopmanagementresources.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
@@ -415,6 +693,21 @@ moc_adminwindow.o: moc_adminwindow.cpp
 
 moc_sellerwindow.o: moc_sellerwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_sellerwindow.o moc_sellerwindow.cpp
+
+moc_registerdialog.o: moc_registerdialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_registerdialog.o moc_registerdialog.cpp
+
+moc_removeentryform.o: moc_removeentryform.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_removeentryform.o moc_removeentryform.cpp
+
+moc_editentryform.o: moc_editentryform.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_editentryform.o moc_editentryform.cpp
+
+moc_addform.o: moc_addform.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_addform.o moc_addform.cpp
+
+moc_signup.o: moc_signup.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_signup.o moc_signup.cpp
 
 ####### Install
 

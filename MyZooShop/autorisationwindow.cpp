@@ -7,11 +7,11 @@ autorisationWindow::autorisationWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QPixmap bkgnd("../cat.jpg");
-    bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    this->setPalette(palette);
+//    QPixmap bkgnd("../cat.jpg");
+//    bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+//    QPalette palette;
+//    palette.setBrush(QPalette::Background, bkgnd);
+//    this->setPalette(palette);
 }
 
 autorisationWindow::~autorisationWindow()

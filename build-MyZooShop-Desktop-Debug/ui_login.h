@@ -15,7 +15,12 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -23,6 +28,15 @@ class Ui_LogIn
 {
 public:
     QDialogButtonBox *buttonBox;
+    QWidget *formLayoutWidget;
+    QFormLayout *formLayout;
+    QLabel *labelUsername;
+    QLabel *labelPassword;
+    QLineEdit *editPassword;
+    QLineEdit *UsernameEdit;
+    QLabel *statusLabel;
+    QPushButton *loginButton;
+    QPushButton *clearButton;
 
     void setupUi(QDialog *LogIn)
     {
@@ -34,6 +48,42 @@ public:
         buttonBox->setGeometry(QRect(30, 240, 341, 32));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+        formLayoutWidget = new QWidget(LogIn);
+        formLayoutWidget->setObjectName(QStringLiteral("formLayoutWidget"));
+        formLayoutWidget->setGeometry(QRect(120, 70, 162, 80));
+        formLayout = new QFormLayout(formLayoutWidget);
+        formLayout->setObjectName(QStringLiteral("formLayout"));
+        formLayout->setContentsMargins(0, 0, 0, 0);
+        labelUsername = new QLabel(formLayoutWidget);
+        labelUsername->setObjectName(QStringLiteral("labelUsername"));
+
+        formLayout->setWidget(0, QFormLayout::LabelRole, labelUsername);
+
+        labelPassword = new QLabel(formLayoutWidget);
+        labelPassword->setObjectName(QStringLiteral("labelPassword"));
+
+        formLayout->setWidget(1, QFormLayout::LabelRole, labelPassword);
+
+        editPassword = new QLineEdit(formLayoutWidget);
+        editPassword->setObjectName(QStringLiteral("editPassword"));
+        editPassword->setEchoMode(QLineEdit::Password);
+
+        formLayout->setWidget(1, QFormLayout::FieldRole, editPassword);
+
+        UsernameEdit = new QLineEdit(formLayoutWidget);
+        UsernameEdit->setObjectName(QStringLiteral("UsernameEdit"));
+
+        formLayout->setWidget(0, QFormLayout::FieldRole, UsernameEdit);
+
+        statusLabel = new QLabel(LogIn);
+        statusLabel->setObjectName(QStringLiteral("statusLabel"));
+        statusLabel->setGeometry(QRect(20, 170, 261, 20));
+        loginButton = new QPushButton(LogIn);
+        loginButton->setObjectName(QStringLiteral("loginButton"));
+        loginButton->setGeometry(QRect(300, 110, 99, 27));
+        clearButton = new QPushButton(LogIn);
+        clearButton->setObjectName(QStringLiteral("clearButton"));
+        clearButton->setGeometry(QRect(300, 150, 99, 27));
 
         retranslateUi(LogIn);
         QObject::connect(buttonBox, SIGNAL(accepted()), LogIn, SLOT(accept()));
@@ -45,6 +95,11 @@ public:
     void retranslateUi(QDialog *LogIn)
     {
         LogIn->setWindowTitle(QApplication::translate("LogIn", "Dialog", 0));
+        labelUsername->setText(QApplication::translate("LogIn", "Login", 0));
+        labelPassword->setText(QApplication::translate("LogIn", "Password", 0));
+        statusLabel->setText(QApplication::translate("LogIn", "status..", 0));
+        loginButton->setText(QApplication::translate("LogIn", "Log In", 0));
+        clearButton->setText(QApplication::translate("LogIn", "Clear", 0));
     } // retranslateUi
 
 };

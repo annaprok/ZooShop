@@ -1,22 +1,26 @@
 #ifndef ADDANIMALDIALOG_H
 #define ADDANIMALDIALOG_H
 
-#include <QDialog>
+#include <QWidget>
 
-namespace Ui {
-class AddAnimalDialog;
-}
+//namespace Ui {
+//class AddAnimalDialog;
+//}
 
-class AddAnimalDialog : public QDialog
-{
-    Q_OBJECT
+//class AddAnimalDialog : public QWidget
+//{
+//    Q_OBJECT
 
-public:
-    explicit AddAnimalDialog(QWidget *parent = 0);
-    ~AddAnimalDialog();
+//public:
+//    explicit AddAnimalDialog(QWidget *parent = 0);
+//    ~AddAnimalDialog();
 
-private:
-    Ui::AddAnimalDialog *ui;
-};
+//private slots:
+//    void on_pushButton_clicked();
 
+//    void on_pushButton_2_clicked();
+
+//private:
+//    Ui::AddAnimalDialog *ui;
+//};
 #endif // ADDANIMALDIALOG_H

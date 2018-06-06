@@ -13,11 +13,14 @@
 #include <QDebug>
 #include <iostream>
 #include "storage.h"
+#include "adminwindow.h"
+#include "login.h"
+#include "signup.h"
 #include <QMainWindow>
 #include <QList>
 #include <QListWidgetItem>
 #include <QMessageBox>
-
+using namespace std;
 namespace Ui {
 class MainWindow;
 }
@@ -31,11 +34,13 @@ class MainWindow : public QMainWindow
 //        QMessage
 //    }
 //    QList<User*> users=_storage->getAllUsers();
+public:
     int PORT=3000;
     QTcpSocket*client;
     QHostAddress serverAddress;
     Storage *storage;
     int status;
+    AdminWindow *aw;
 
 
     Q_OBJECT
@@ -45,12 +50,24 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    bool login(const QString &userName, const QString &password);
+    //bool login(const QString &userName, const QString &password);
     void logout();
 
 private:
     Ui::MainWindow *ui;
     QSqlDatabase m_database;
+     LogIn *login;
+     SignUp*signup;
+public slots:
+    //void slotAcceptUserLogin(QString name,QString passw,int role);
+private slots:
+    void on_showAniButton_clicked();
+
+    void on_showGoodsButton_clicked();
+    void on_showCustomersButton_clicked();
+    void on_selectButton_clicked();
+    void on_register_btn_clicked();
+    void on_login_btn_clicked();
 };
 
 #endif // MAINWINDOW_H
