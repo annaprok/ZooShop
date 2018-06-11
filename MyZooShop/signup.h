@@ -17,6 +17,7 @@ class SignUp : public QDialog
     Q_OBJECT
 
 public:
+    int id;
     explicit SignUp(QWidget *parent = 0);
     ~SignUp();
      QString hashFunc(QString password);
@@ -25,6 +26,8 @@ private slots:
     void on_loginButton_clicked();
 
     void on_clearButton_clicked();
+
+    void on_checkBox_clicked(bool checked);
 
 private:
     Ui::SignUp *ui;

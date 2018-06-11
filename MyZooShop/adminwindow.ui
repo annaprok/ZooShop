@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>758</width>
+    <width>1223</width>
     <height>465</height>
    </rect>
   </property>
@@ -132,8 +132,8 @@
    <widget class="QProgressBar" name="progressBar">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>130</y>
+      <x>890</x>
+      <y>120</y>
       <width>118</width>
       <height>23</height>
      </rect>
@@ -147,13 +147,18 @@
      <rect>
       <x>10</x>
       <y>40</y>
-      <width>160</width>
+      <width>189</width>
       <height>80</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QLabel" name="label_2">
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Tables:</string>
        </property>
@@ -164,17 +169,74 @@
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QCheckBox" name="checkBox">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>130</y>
-      <width>141</width>
-      <height>41</height>
+      <x>50</x>
+      <y>140</y>
+      <width>131</width>
+      <height>22</height>
      </rect>
     </property>
     <property name="text">
-     <string>Choose table</string>
+     <string>Enable tables</string>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="commandLinkButton">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>60</y>
+      <width>187</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Tables</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>900</x>
+      <y>160</y>
+      <width>191</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>178</x>
+      <y>140</y>
+      <width>171</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Become a Golden client</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>140</y>
+      <width>171</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Show goods for my pets</string>
     </property>
    </widget>
   </widget>
@@ -183,7 +245,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>758</width>
+     <width>1223</width>
      <height>25</height>
     </rect>
    </property>
@@ -233,7 +295,7 @@
      <normaloff>:Icons/Misc-New-Database-icon.png</normaloff>:Icons/Misc-New-Database-icon.png</iconset>
    </property>
    <property name="text">
-    <string>New Animal</string>
+    <string>New</string>
    </property>
   </action>
   <action name="actionEdit_Entry">
@@ -242,7 +304,7 @@
      <normaloff>:Icons/Pencil-icon.png</normaloff>:Icons/Pencil-icon.png</iconset>
    </property>
    <property name="text">
-    <string>Edit Animals</string>
+    <string>Edit </string>
    </property>
   </action>
   <action name="actionExit">
@@ -260,7 +322,7 @@
      <normaloff>:Icons/database-remove-icon.png</normaloff>:Icons/database-remove-icon.png</iconset>
    </property>
    <property name="text">
-    <string>Remove Animal</string>
+    <string>Remove </string>
    </property>
   </action>
   <action name="actionAbout_Developer">

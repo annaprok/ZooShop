@@ -1,12 +1,16 @@
 #include "editentryform.h"
 #include "ui_editentryform.h"
 #include "databaseconnection.h"
+#include <QtSql>
+#include <QtWidgets>
+using namespace std;
 
 editentryForm::editentryForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::editentryForm)
 {
     ui->setupUi(this);
+
 }
 
 editentryForm::~editentryForm()
@@ -54,12 +58,6 @@ void editentryForm::on_pushButton_clicked()
               isCorrectEntry = editQry.exec();
             }
 
-            if(ui->lineEdit_1->text()!=""){                                                 //ISBN is updated at end to prevent the wrong referencing of ISBN in updting other entries.
-              editQry.prepare("update animals set id = :newisbn where id = :isbn");
-              editQry.bindValue(":newisbn",ui->lineEdit_1->text());
-              editQry.bindValue(":isbn",ui->lineEdit->text());
-              isCorrectEntry = editQry.exec();
-            }
             if(ui->lineEdit_5->text()!=""){                                                 //ISBN is updated at end to prevent the wrong referencing of ISBN in updting other entries.
               editQry.prepare("update animals set diet = :newisbn where id = :isbn");
               editQry.bindValue(":newisbn",ui->lineEdit_5->text());
@@ -78,6 +76,12 @@ void editentryForm::on_pushButton_clicked()
               editQry.bindValue(":isbn",ui->lineEdit->text());
               isCorrectEntry = editQry.exec();
             }
+            if(image!=0){
+                 editQry.prepare("update animals set photo = :photo where id = :isbn");
+                 editQry.bindValue(":photo",image, QSql::In | QSql::Binary);
+                 editQry.bindValue(":isbn",ui->lineEdit->text());
+                 isCorrectEntry = editQry.exec();
+            }
     }
 
     editDB.closeConnection();
@@ -88,7 +92,7 @@ void editentryForm::on_pushButton_clicked()
     else if (ui->lineEdit->text() != ""){
         QMessageBox::about(this,"Failed!","Error in Value or Input type!");
     }
-
+    image=0;
     ui->lineEdit->setText("");
     ui->lineEdit_2->setText("");
     ui->lineEdit_3->setText("");
@@ -99,4 +103,38 @@ void editentryForm::on_pushButton_clicked()
 void editentryForm::on_pushButton_2_clicked()
 {
     this->close();
+}
+string get_ext (const string& st) {
+    size_t pos = st.rfind('.');
+    if (pos <= 0) return "";
+    return st.substr(pos+1, string::npos);
+}
+void editentryForm::on_pushButton_3_clicked()
+{
+    QString str=QFileDialog::getOpenFileName(this,tr("Load file"),"",tr("Image file(*.png *.jpg *.jpeg)"));
+    //string x=get_ext(str);
+    QFile file(str);
+    if (!file.open(QIODevice::ReadOnly))
+    {
+        QMessageBox::about(this,"No Image!","Load file error");
+        return;
+    }
+
+    QMessageBox::about(this,"Congrats!","Image loaded");
+    QByteArray inByteArray = file.readAll();
+//    QBuffer inBuffer( &inByteArray );
+//        inBuffer.open( QIODevice::WriteOnly );
+//    if(get_ext(str)=="png"){
+
+//        inPixmap.save( &inBuffer, "PNG" );
+//    }
+//    else if(get_ext(str)=="jpg"){
+//         inPixmap.save( &inBuffer, "JPG" );
+//    }
+//    else if(get_ext(str)=="jpeg"){
+//         inPixmap.save( &inBuffer, "JPEG" );
+//    }
+
+
+        image=inByteArray;
 }

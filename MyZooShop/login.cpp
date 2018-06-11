@@ -12,17 +12,17 @@ LogIn::LogIn(QWidget *parent) :
 {
     ui->setupUi(this);
     accepted=false;
-    MyDb=QSqlDatabase::addDatabase("QSQLITE");
-    MyDb.setDatabaseName(path);
-    QFileInfo checkFile(path);
-    if(checkFile.isFile()){
-        if(MyDb.open()){
-            ui->statusLabel->setText("[+] Connected");
-        }
-        else{
-             ui->statusLabel->setText("[!] connection error");
-        }
-    }
+//    MyDb=QSqlDatabase::addDatabase("QSQLITE");
+//    MyDb.setDatabaseName(path);
+//    QFileInfo checkFile(path);
+//    if(checkFile.isFile()){
+//        if(MyDb.open()){
+//            ui->statusLabel->setText("[+] Connected");
+//        }
+//        else{
+//             ui->statusLabel->setText("[!] connection error");
+//        }
+//    }
 
 }
 
@@ -31,8 +31,9 @@ LogIn::~LogIn()
     delete ui;
 
 
-    MyDb.close();
-    cout<<"close db"<<endl;
+//    MyDb.close();
+//    QSqlDatabase::removeDatabase("QSQLITE");
+//    cout<<"close db"<<endl;
 }
 
 void LogIn::setUsername(QString &username){
@@ -112,16 +113,15 @@ void LogIn::on_clearButton_clicked()
 
 void LogIn::on_loginButton_clicked()
 {
+    connectDatabase MyDb;
+    MyDb.openConnection();
+
+    if(!MyDb.openConnection()){
+        QMessageBox::critical(this,"Database Error!","Error Connecting to Database! Please try again or Check Database.");
+    }
+
     QString password=hashFunc(ui->editPassword->text());
 
-    if (!MyDb.open())
-      {
-         qDebug() << "Error: connection with database fail";
-      }
-      else
-      {
-         qDebug() << "Database: connection ok";
-      }
     QSqlQuery query;
     query.prepare("SELECT login,password_hash,role FROM users WHERE login = (:name) AND password_hash = (:pass)");
     query.bindValue(":name", ui->UsernameEdit->text());
@@ -136,14 +136,24 @@ void LogIn::on_loginButton_clicked()
           accepted=true;
           role=status;
           emit acceptLogin(ui->UsernameEdit->text(),password,status );
+          AdminWindow *aw=new AdminWindow();
           if(status==1){
             QMessageBox::information(this,"Login was succesful","Welcome administrator!");
-            AdminWindow *aw=new AdminWindow();
+            aw->role=1;
             aw->show();
 
           }
           else if(status==0){
+              aw->role=0;
               QMessageBox::information(this,"Login was succesful","Welcome seller!");
+              aw->show();
+
+          }
+          else if(status==-1){
+              aw->role=-1;
+              QMessageBox::information(this,"Login was succesful","Welcome!");
+              aw->show();
+
           }
 
           this->close();
@@ -176,6 +186,7 @@ void LogIn::on_loginButton_clicked()
                this->close();
            }
        }
+     MyDb.closeConnection();
 
 }
 

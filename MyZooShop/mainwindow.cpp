@@ -69,8 +69,8 @@ void MainWindow::on_showAniButton_clicked()
       model->setHeaderData(0, Qt::Horizontal, tr("№"));
 
 
-      ui->tableView->setModel(model);
-      ui->tableView->show();
+//      ui->tableView->setModel(model);
+//      ui->tableView->show();
        MyDb.close();
 }
 
@@ -90,8 +90,8 @@ void MainWindow::on_showGoodsButton_clicked()
       model->setHeaderData(0, Qt::Horizontal, tr("№"));
 
 
-      ui->tableView->setModel(model);
-      ui->tableView->show();
+//      ui->tableView->setModel(model);
+//      ui->tableView->show();
        MyDb.close();
 
 }
@@ -110,8 +110,8 @@ void MainWindow::on_showCustomersButton_clicked()
       model->setHeaderData(0, Qt::Horizontal, tr("№"));
 
 
-      ui->tableView->setModel(model);
-      ui->tableView->show();
+//      ui->tableView->setModel(model);
+//      ui->tableView->show();
        MyDb.close();
 }
 

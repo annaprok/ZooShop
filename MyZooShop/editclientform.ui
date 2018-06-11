@@ -1,23 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>editentryForm</class>
- <widget class="QWidget" name="editentryForm">
+ <class>EditClientForm</class>
+ <widget class="QWidget" name="EditClientForm">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>823</width>
-    <height>412</height>
+    <width>894</width>
+    <height>446</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>200</y>
+     <width>191</width>
+     <height>41</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>50</y>
+     <width>241</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>24</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Update Clients</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>80</y>
+     <x>160</x>
+     <y>140</y>
      <width>201</width>
      <height>61</height>
     </rect>
@@ -31,11 +62,24 @@
     <string>Enter Primary Key (ISBN)</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>360</y>
+     <width>101</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Update</string>
+   </property>
+  </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>420</x>
-     <y>50</y>
+     <x>510</x>
+     <y>110</y>
      <width>211</width>
      <height>61</height>
     </rect>
@@ -49,55 +93,11 @@
     <string>Values to be Updated</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>260</x>
-     <y>-10</y>
-     <width>241</width>
-     <height>81</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>24</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Update Animals</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>140</y>
-     <width>191</width>
-     <height>41</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>300</y>
-     <width>101</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Update</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>300</y>
+     <x>260</x>
+     <y>360</y>
      <width>101</width>
      <height>41</height>
     </rect>
@@ -109,15 +109,15 @@
   <widget class="QWidget" name="formLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>340</x>
-     <y>130</y>
-     <width>311</width>
-     <height>271</height>
+     <x>480</x>
+     <y>200</y>
+     <width>331</width>
+     <height>211</height>
     </rect>
    </property>
    <layout class="QFormLayout" name="formLayout">
     <item row="0" column="0">
-     <widget class="QLabel" name="label_9">
+     <widget class="QLabel" name="label_4">
       <property name="font">
        <font>
         <pointsize>16</pointsize>
@@ -125,7 +125,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Species</string>
+       <string>Name</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -136,25 +136,22 @@
      <widget class="QLineEdit" name="lineEdit_2"/>
     </item>
     <item row="1" column="0">
-     <widget class="QLabel" name="label_10">
+     <widget class="QLabel" name="label_5">
       <property name="font">
        <font>
         <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
-       <string>Health</string>
+       <string>Added</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="lineEdit_3"/>
-    </item>
     <item row="2" column="0">
-     <widget class="QLabel" name="label_11">
+     <widget class="QLabel" name="label_6">
       <property name="font">
        <font>
         <pointsize>16</pointsize>
@@ -162,7 +159,7 @@
        </font>
       </property>
       <property name="text">
-       <string>Arrived</string>
+       <string>Telephone</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -170,70 +167,62 @@
      </widget>
     </item>
     <item row="2" column="1">
-     <widget class="QLineEdit" name="lineEdit_4"/>
+     <widget class="QLineEdit" name="lineEdit_5">
+      <property name="inputMethodHints">
+       <set>Qt::ImhNone</set>
+      </property>
+      <property name="inputMask">
+       <string/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="cursorPosition">
+       <number>0</number>
+      </property>
+     </widget>
     </item>
     <item row="3" column="0">
-     <widget class="QLabel" name="label_12">
+     <widget class="QLabel" name="label_7">
       <property name="font">
        <font>
         <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
-       <string>Diet</string>
+       <string>Address</string>
       </property>
      </widget>
     </item>
     <item row="3" column="1">
-     <widget class="QLineEdit" name="lineEdit_5"/>
+     <widget class="QLineEdit" name="lineEdit_3"/>
     </item>
     <item row="4" column="0">
-     <widget class="QLabel" name="label_13">
+     <widget class="QLabel" name="label_8">
       <property name="font">
        <font>
         <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
-       <string>Note</string>
+       <string>Animals</string>
       </property>
      </widget>
     </item>
     <item row="4" column="1">
-     <widget class="QLineEdit" name="lineEdit_6"/>
+     <widget class="QLineEdit" name="lineEdit_4"/>
     </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="label_14">
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-       </font>
+    <item row="1" column="1">
+     <widget class="QDateEdit" name="dateEdit">
+      <property name="minimumDate">
+       <date>
+        <year>1752</year>
+        <month>9</month>
+        <day>17</day>
+       </date>
       </property>
-      <property name="text">
-       <string>Price</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
-    </item>
-    <item row="6" column="0">
-     <widget class="QLabel" name="label_4">
-      <property name="font">
-       <font>
-        <pointsize>16</pointsize>
-        <italic>true</italic>
-       </font>
-      </property>
-      <property name="text">
-       <string>Photo</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QPushButton" name="pushButton_3">
-      <property name="text">
-       <string>Add photo</string>
+      <property name="calendarPopup">
+       <bool>true</bool>
       </property>
      </widget>
     </item>

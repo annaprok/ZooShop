@@ -5,7 +5,7 @@
         <file>Icons/Pencil-icon.png</file>
         <file>addform.cpp</file>
         <file>addform.h</file>
-        <file>addanimalform.ui</file>
+        <file>addclientform.ui</file>
         <file>shopmanagementresources.qrc</file>
         <file>MyZooShop.pro</file>
         <file>main.cpp</file>
@@ -15,5 +15,7 @@
         <file>Icons/database-remove-icon.png</file>
         <file>Icons/QtProject-creator-icon.png</file>
         <file>Icons/Very-Basic-About-icon.png</file>
+        <file>addclientform.cpp</file>
+        <file>addclientform.h</file>
     </qresource>
 </RCC>

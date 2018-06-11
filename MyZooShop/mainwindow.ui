@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>956</width>
-    <height>552</height>
+    <width>570</width>
+    <height>333</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,112 +17,55 @@
    <widget class="QPushButton" name="login_btn">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>10</y>
-      <width>99</width>
-      <height>27</height>
+      <x>340</x>
+      <y>140</y>
+      <width>101</width>
+      <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
     <property name="text">
-     <string>login</string>
+     <string>Login</string>
     </property>
    </widget>
    <widget class="QPushButton" name="register_btn">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>80</x>
+      <y>140</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Sign Up</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
       <y>20</y>
-      <width>99</width>
-      <height>27</height>
+      <width>301</width>
+      <height>81</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>18</pointsize>
+     </font>
     </property>
     <property name="text">
-     <string>register</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="showAniButton">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>100</y>
-      <width>99</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Show animals</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="showGoodsButton">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>100</y>
-      <width>99</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Show goods</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="showCustomersButton">
-    <property name="geometry">
-     <rect>
-      <x>268</x>
-      <y>100</y>
-      <width>121</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Show customers</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="showSellersButton">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>150</y>
-      <width>99</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Show sellers</string>
-    </property>
-   </widget>
-   <widget class="QTableView" name="tableView">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>250</y>
-      <width>256</width>
-      <height>192</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="selectButton">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>150</y>
-      <width>99</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Select</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="comboBox">
-    <property name="geometry">
-     <rect>
-      <x>430</x>
-      <y>150</y>
-      <width>85</width>
-      <height>27</height>
-     </rect>
+     <string>Welcome to our ZooShop!</string>
     </property>
    </widget>
   </widget>
@@ -131,7 +74,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>956</width>
+     <width>570</width>
      <height>25</height>
     </rect>
    </property>

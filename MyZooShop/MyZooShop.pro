@@ -33,7 +33,17 @@ SOURCES += main.cpp\
     editentryform.cpp \
     addform.cpp \
     signup.cpp \
-    userwindow.cpp
+    userwindow.cpp \
+    addclientform.cpp \
+    addstaffform.cpp \
+    addgoodsform.cpp \
+    editclientform.cpp \
+    editgoodsform.cpp \
+    editstaffform.cpp \
+    removeclientform.cpp \
+    removegoodsform.cpp \
+    removestaffform.cpp \
+    addpetform.cpp
 
 HEADERS  += mainwindow.h \
     autorisationwindow.h \
@@ -47,13 +57,22 @@ HEADERS  += mainwindow.h \
     common_global.h \
     client.h \
     dbmanager.h \
-    addanimaldialog.h \
     removeentryform.h \
     editentryform.h \
     databaseconnection.h \
     addform.h \
     signup.h \
-    userwindow.h
+    userwindow.h \
+    addclientform.h \
+    addstaffform.h \
+    addgoodsform.h \
+    editclientform.h \
+    editgoodsform.h \
+    editstaffform.h \
+    removeclientform.h \
+    removegoodsform.h \
+    removestaffform.h \
+    addpetform.h
 
 FORMS    += mainwindow.ui \
     autorisationwindow.ui \
@@ -63,10 +82,19 @@ FORMS    += mainwindow.ui \
     registerdialog.ui \
     editentryform.ui \
     removeentryform.ui \
-    addanimalform.ui \
     addform.ui \
     signup.ui \
-    userwindow.ui
+    userwindow.ui \
+    addclientform.ui \
+    addstaffform.ui \
+    addgoodsform.ui \
+    editclientform.ui \
+    editgoodsform.ui \
+    editstaffform.ui \
+    removeclientform.ui \
+    removegoodsform.ui \
+    removestaffform.ui \
+    addpetform.ui
 
 RESOURCES += \
     shopmanagementresources.qrc

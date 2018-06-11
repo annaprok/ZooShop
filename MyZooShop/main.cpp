@@ -3,6 +3,8 @@
 #include "sellerwindow.h"
 #include "login.h"
 #include <QApplication>
+#include <QtSql>
+#include <QtWidgets>
 
 
 int main(int argc, char *argv[])
@@ -14,7 +16,7 @@ int main(int argc, char *argv[])
 
         //w.show();
 
-        LogIn login;
+        //LogIn login;
         //ogin.show();
         MainWindow w;
         w.storage=new Storage(3000,(QHostAddress)"127.0.0.1");
