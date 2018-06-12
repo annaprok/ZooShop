@@ -6,6 +6,7 @@ AddClientForm::AddClientForm(QWidget *parent) :
     ui(new Ui::AddClientForm)
 {
     ui->setupUi(this);
+    ui->formLayoutWidget->setVisible(false);
 
 }
 
@@ -17,7 +18,7 @@ AddClientForm::~AddClientForm()
 
 void AddClientForm::on_pushButton_3_clicked()
 {
-
+    clientId=AddPet.clientId;
     connectDatabase addEntry;
     addEntry.openConnection();
 
@@ -30,15 +31,10 @@ void AddClientForm::on_pushButton_3_clicked()
 
         //Write Query to database.
         QSqlQuery writeQry;
-        writeQry.bindValue(":telephone",ui->newEdit->text());
+
+        //writeQry.bindValue(":telephone",ui->newEdit->text());
         // Get image data back from database
-        query1.prepare( "SELECT id from users where login = :login and password_hash = :pass and role =-1" );
-        query1.bindValue( ":id", imgId );
-        query1.bindValue(":login",name);
-        query1.bindValue(":pass", password);
-        if( !query1.exec( ))
-                qDebug() << "Error getting image from table:\n" << query1.lastError();
-        int userId=querry1.value(0).toInteger();
+
 
         writeQry.prepare("insert into clients (name,added,telephone,address,userid) values(:name,:added,:telephone,:address,:userid);");
         writeQry.bindValue(":name",ui->lineEdit->text());
@@ -46,14 +42,23 @@ void AddClientForm::on_pushButton_3_clicked()
         writeQry.bindValue(":address",ui->lineEdit_3->text());
         //writeQry.bindValue(":animals",ui->lineEdit_4->text());
         writeQry.bindValue(":telephone",ui->newEdit->text());
-        writeQry.bindValue(":telephone",id);
+        if(role==-1)
+        {
+            writeQry.bindValue(":userid",id);
+        }
+        else
+        {
+            writeQry.bindValue(":userid",ui->lineEdit_2->text());
+        }
 
         bool written = writeQry.exec();
 
-        if(written){
+        if(written)
+        {
             QMessageBox::about(this,"Entry Updated!","Entry Updated to Database.");
         }
-        else{
+        else
+        {
             QMessageBox::about(this,"Error Updating.","Error Updating Database! Check Connection or values!");
         }
         addEntry.closeConnection();
@@ -78,4 +83,16 @@ void AddClientForm::on_pushButton_clicked()
      if(role==-1)
       AddPet.ownerId=id;
     AddPet.show();
+}
+
+void AddClientForm::on_checkBox_clicked(bool checked)
+{
+
+       ui->formLayoutWidget->setVisible(checked);
+    if(checked){
+        if(role!=-1){
+            ui->label_9->setVisible(false);
+            ui->lineEdit_2->setVisible(false);
+        }
+    }
 }

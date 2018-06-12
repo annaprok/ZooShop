@@ -117,13 +117,31 @@ class COMMONSHARED_EXPORT Response
 
 
 ////////////////////////////////////////////////////////////////////
-/// \brief The ZooRequest class
+///  The ZooRequest class
+
+class COMMONSHARED_EXPORT Animal
+{
+ public:
+    QString species;
+    QString arrived;
+    QString health;
+    QString diet;
+    QString notes;
+    double price;
+    QByteArray photo;
+    //Composer composer;
+    //QString fileName;
+    Animal (QString  species,QString  arrived,QString  health,QString  diet,QString  notes,double price,QByteArray & photo);
+    Animal ();
+};
 class COMMONSHARED_EXPORT ZooFuncName
 {
 public:
     typedef enum {
         FN_NONE,
-        FN_SHOW_ANIMALS
+        FN_SHOW_ANIMALS,
+        FN_ADD_ANIMAL,
+        FN_DELETE_ANIMAL
     } FuncName;
     QString toString(FuncName fn);
     ZooFuncName();
@@ -133,20 +151,21 @@ public:
 class COMMONSHARED_EXPORT ZooRequest
 {
  public:
-    FunctionName::FuncName functionName;
+    ZooFuncName::FuncName functionName;
     int id;
     QString path;
+    Animal animal;
     //Composer composer;
     //QString fileName;
     void clear(ZooRequest & req);
-    //ZooRequest();
+    ZooRequest();
 };
 class COMMONSHARED_EXPORT ZooResponse
 {
  public:
     int status;
     int id;
-    QSqlTableModel model;
+    QString model;
     //QStringList  files;
     //QList<Composer*> composers;
     ZooResponse();
@@ -154,7 +173,8 @@ class COMMONSHARED_EXPORT ZooResponse
 
 
 
-/////////////////////////////////////////////////
+
+///////////////////////////////////////////////////
 class COMMONSHARED_EXPORT Common
 {
 
@@ -174,6 +194,8 @@ public:
     QString serializeZooResponse(ZooResponse * response);
     QString serializeModel(QSqlTableModel *m_model);
     QSqlTableModel * deserializeModel(QString &str);
+    QString serializeAnimal(Animal*animal);
+    Animal * deserializeAnimal(QString str);
 };
 
 #endif // COMMON_H

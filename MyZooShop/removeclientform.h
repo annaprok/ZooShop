@@ -12,6 +12,7 @@ class RemoveClientForm : public QWidget
     Q_OBJECT
 
 public:
+    int toRemove;
     explicit RemoveClientForm(QWidget *parent = 0);
     ~RemoveClientForm();
 

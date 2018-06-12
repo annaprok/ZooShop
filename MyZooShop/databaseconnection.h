@@ -29,6 +29,9 @@ public:
     void closeConnection(){
         DB.close();
      }
+    void selectAllAnimals();
+    void selectAnimals(int field);
+
   };
 
 #endif // DATABASECONNECTION_H

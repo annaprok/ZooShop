@@ -18,6 +18,7 @@ class AddClientForm : public QWidget
 public:
     int role;
     int id;
+    int clientId;
     explicit AddClientForm(QWidget *parent = 0);
     ~AddClientForm();
 
@@ -27,6 +28,8 @@ private slots:
     void on_pushButton_4_clicked();
 
     void on_pushButton_clicked();
+
+    void on_checkBox_clicked(bool checked);
 
 private:
     AddPetForm AddPet;

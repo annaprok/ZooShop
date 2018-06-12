@@ -1,4 +1,5 @@
 #include "adminwindow.h"
+#include "login.h"
 #include "ui_adminwindow.h"
 #include <QtWidgets>
 
@@ -15,7 +16,10 @@ AdminWindow::AdminWindow(QWidget *parent) :
     ui->actionEdit_Entry->setVisible(false);
     ui->actionRemove_Entry->setVisible(false);
     ui->actionNew_Entry->setVisible(false);
-    id=0;
+    ui->pushButton_2->setVisible(false);
+    ui->pushButton_3->setVisible(false);
+    Clientid=0;
+    Userid=0;
     role=0;
 }
 
@@ -35,8 +39,11 @@ void AdminWindow::on_actionNew_Entry_triggered()
         addAnimal.show();
      else if(ui->comboTables->currentText() == "Staff")
          AddStaff.show();
-     else if(ui->comboTables->currentText() == "Clients")
+     else if(ui->comboTables->currentText() == "Clients"){
+         //AddClient.id=-1;
          AddClient.show();
+     }
+
      else if(ui->comboTables->currentText() == "Goods")
          AddGoods.show();
 
@@ -214,27 +221,47 @@ void AdminWindow::on_pushButton_clicked()
 
 void AdminWindow::on_actionEdit_Entry_triggered()
 {
-    if(ui->comboTables->currentText()== "Animals")
+    int cRow=ui->tableView->currentIndex().row();
+    int row=ui->tableView->currentIndex().sibling(cRow,0).data().toInt();
+    if(ui->comboTables->currentText()== "Animals"){
+       editDBentry.toEdit=row;
        editDBentry.show();
-    else if(ui->comboTables->currentText() == "Staff")
+    }
+    else if(ui->comboTables->currentText() == "Staff"){
+        EditStaff.toEdit=row;
         EditStaff.show();
-    else if(ui->comboTables->currentText() == "Clients")
+    }
+    else if(ui->comboTables->currentText() == "Clients"){
+        EditClient.toEdit=row;
         EditClient.show();
-    else if(ui->comboTables->currentText() == "Goods")
+    }
+    else if(ui->comboTables->currentText() == "Goods"){
+        EditGoods.toEdit=row;
         EditGoods.show();
+    }
 
 }
 
 void AdminWindow::on_actionRemove_Entry_triggered()
 {
-    if(ui->comboTables->currentText()== "Animals")
+    int cRow=ui->tableView->currentIndex().row();
+    int row=ui->tableView->currentIndex().sibling(cRow,0).data().toInt();
+    if(ui->comboTables->currentText()== "Animals"){
+       removeEntry.toRemove=row;
        removeEntry.show();
-    else if(ui->comboTables->currentText() == "Staff")
+    }
+    else if(ui->comboTables->currentText() == "Staff"){
+        RemoveStaff.toRemove=row;
         RemoveStaff.show();
-    else if(ui->comboTables->currentText() == "Clients")
+    }
+    else if(ui->comboTables->currentText() == "Clients"){
+        RemoveClient.toRemove=row;
         RemoveClient.show();
-    else if(ui->comboTables->currentText() == "Goods")
+    }
+    else if(ui->comboTables->currentText() == "Goods"){
+        RemoveGoods.toRemove=row;
         RemoveGoods.show();
+    }
 
 }
 
@@ -281,8 +308,11 @@ void AdminWindow::on_comboTables_highlighted(const QString &arg1)
 void AdminWindow::on_pushButton_2_clicked()
 {
     AddClient.role=-1;
-    AddClient.id=id;
+    AddClient.id=Userid;
     AddClient.show();
+    LogIn login;
+    login.show();
+    //this->close();
 }
 
 void AdminWindow::on_commandLinkButton_clicked()
@@ -312,16 +342,22 @@ void AdminWindow::on_checkBox_stateChanged(int arg1)
              list=(QStringList()<<"Staff"<<"Clients"<<"Animals"<<"Goods");
              ui->actionEdit_Entry->setVisible(true);
              ui->actionRemove_Entry->setVisible(true);
+             ui->actionEdit_Entry->setEnabled(false);
+             ui->actionRemove_Entry->setEnabled(false);
              ui->actionNew_Entry->setVisible(true);
         }
         else if(role==0){
             list=(QStringList()<<"Clients"<<"Animals"<<"Goods");
             ui->actionEdit_Entry->setVisible(true);
             ui->actionRemove_Entry->setVisible(true);
+            ui->actionEdit_Entry->setEnabled(false);
+            ui->actionRemove_Entry->setEnabled(false);
             ui->actionNew_Entry->setVisible(true);
         }
         else if(role==-1){
             list=(QStringList()<<"Animals"<<"Goods");
+            //ui->pushButton_2->setVisible(true);
+            //ui->pushButton_3->setVisible(true);
         }
         ui->comboTables->addItems(list);
 
@@ -332,10 +368,14 @@ void AdminWindow::on_checkBox_stateChanged(int arg1)
 
 void AdminWindow::on_tableView_clicked(const QModelIndex &index)
 {
+    if(role!=-1){
+        ui->actionEdit_Entry->setEnabled(true);
+        ui->actionRemove_Entry->setEnabled(true);
+    }
     connectDatabase searchDB;
     searchDB.openConnection();
     QSqlQuery query;
-    int imgId=index.row()+1;
+    int imgId=index.sibling(index.row(),0).data().toInt();
 
         // Get image data back from database
         query.prepare( "SELECT photo from animals where id = :id" );
@@ -364,73 +404,73 @@ void AdminWindow::on_tableView_clicked(const QModelIndex &index)
 
 void AdminWindow::on_pushButton_3_clicked()
 {
-    connectDatabase searchDB;
-    searchDB.openConnection();
-    QSqlQuery query;
-    QSqlQueryModel* databaseModel = new QSqlQueryModel;
-    //int imgId=index.row()+1;
+//    connectDatabase searchDB;
+//    searchDB.openConnection();
+//    QSqlQuery query;
+//    QSqlQueryModel* databaseModel = new QSqlQueryModel;
+//    //int imgId=index.row()+1;
 
-        // Get image data back from database
-        query.prepare( "SELECT species from pets where owner = :id" );
-        query.bindValue( ":id", id );
-        if( !query.exec( ))
-                qDebug() << "Error getting image from table:\n" << query.lastError();
-        //query.first();
-        QStringList species;
-        while(query.next())
-        {
-            //if (query.isValid())
-            species<<query.value(0).toString();
-        }
-        bool valid[6]={true};
-        for(int i=0;i<species.length();i++){
-            QSqlQuery query1;
-            QString name=species.at(i);
-            if(name=="cat"&&valid[0]){
+//        // Get image data back from database
+//        query.prepare( "SELECT species from pets where owner = :id" );
+//        query.bindValue( ":id", AddClient.clientId );
+//        if( !query.exec( ))
+//                qDebug() << "Error getting image from table:\n" << query.lastError();
+//        //query.first();
+//        QStringList species;
+//        while(query.next())
+//        {
+//            //if (query.isValid())
+//            species<<query.value(0).toString();
+//        }
+//        bool valid[6]={true};
+//        for(int i=0;i<species.length();i++){
+//            QSqlQuery query1;
+//            QString name=species.at(i);
+//            if(name=="cat"&&valid[0]){
 
-                query1.prepare( "SELECT *from goods where category = :category" );
-                query1.bindValue( ":category", "for cats" );
-                if( !query1.exec( ))
-                        qDebug() << "Error getting image from table:\n" << query.lastError();
-                valid[0]=false;
-            }
-            else if(name=="dog"&&valid[1]){
-                query1.prepare( "SELECT *from goods where category = :category" );
-                query1.bindValue( ":category", "for dogs" );
-                if( !query1.exec( ))
-                        qDebug() << "Error getting image from table:\n" << query.lastError();
-                valid[1]=false;
-            }
-            else if(name=="mouse"&&valid[2]){
-                query1.prepare( "SELECT *from goods where category = :category" );
-                query1.bindValue( ":category", "for mice" );
-                if( !query1.exec( ))
-                        qDebug() << "Error getting image from table:\n" << query.lastError();
-                valid[2]=false;
-            }
-            else if(name=="panda"&&valid[3]){
-                query1.prepare( "SELECT *from goods where category = :category" );
-                query1.bindValue( ":category", "for pandas" );
-                if( !query1.exec( ))
-                        qDebug() << "Error getting image from table:\n" << query.lastError();
-                valid[3]=false;
-            }
-            else if(name=="snake"&&valid[4]){
-                query1.prepare( "SELECT *from goods where category = :category" );
-                query1.bindValue( ":category", "for snakes" );
-                if( !query1.exec( ))
-                        qDebug() << "Error getting image from table:\n" << query.lastError();
-                valid[4]=false;
-            }
-            while (query1.next()) {
+//                query1.prepare( "SELECT *from goods where category = :category" );
+//                query1.bindValue( ":category", "for cats" );
+//                if( !query1.exec( ))
+//                        qDebug() << "Error getting image from table:\n" << query.lastError();
+//                valid[0]=false;
+//            }
+//            else if(name=="dog"&&valid[1]){
+//                query1.prepare( "SELECT *from goods where category = :category" );
+//                query1.bindValue( ":category", "for dogs" );
+//                if( !query1.exec( ))
+//                        qDebug() << "Error getting image from table:\n" << query.lastError();
+//                valid[1]=false;
+//            }
+//            else if(name=="mouse"&&valid[2]){
+//                query1.prepare( "SELECT *from goods where category = :category" );
+//                query1.bindValue( ":category", "for mice" );
+//                if( !query1.exec( ))
+//                        qDebug() << "Error getting image from table:\n" << query.lastError();
+//                valid[2]=false;
+//            }
+//            else if(name=="panda"&&valid[3]){
+//                query1.prepare( "SELECT *from goods where category = :category" );
+//                query1.bindValue( ":category", "for pandas" );
+//                if( !query1.exec( ))
+//                        qDebug() << "Error getting image from table:\n" << query.lastError();
+//                valid[3]=false;
+//            }
+//            else if(name=="snake"&&valid[4]){
+//                query1.prepare( "SELECT *from goods where category = :category" );
+//                query1.bindValue( ":category", "for snakes" );
+//                if( !query1.exec( ))
+//                        qDebug() << "Error getting image from table:\n" << query.lastError();
+//                valid[4]=false;
+//            }
+//            while (query1.next()) {
 
-                     databaseModel->insertRow(databaseModel->rowCount(),query1.value(0).toModelIndex());
-             }
-        }
+//                     databaseModel->insertRow(databaseModel->rowCount(),query1.value(0).toModelIndex());
+//             }
+//        }
 
 
-        ui->tableView->setModel(databaseModel);
-        ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+//        ui->tableView->setModel(databaseModel);
+//        ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-         searchDB.closeConnection();
+//         searchDB.closeConnection();
 }

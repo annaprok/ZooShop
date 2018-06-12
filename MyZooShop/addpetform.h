@@ -13,6 +13,7 @@ class AddPetForm : public QWidget
 
 public:
     int ownerId;
+    int clientId;
     int role;
     explicit AddPetForm(QWidget *parent = 0);
     ~AddPetForm();

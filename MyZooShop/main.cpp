@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
         //LogIn login;
         //ogin.show();
         MainWindow w;
-        w.storage=new Storage(3000,(QHostAddress)"127.0.0.1");
+        w.storage=new Storage(3000, QHostAddress("127.0.0.1"));
         w.show();
 
 //        connect( login,

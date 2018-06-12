@@ -62,14 +62,14 @@ void SignUp::on_loginButton_clicked()
                 AdminWindow *aw = new AdminWindow();
                 aw->role=-1;
 
-                aw->Userid=// Get image data back from database
+                QSqlQuery query1;
+                // Get image data back from database
                         query1.prepare( "SELECT id from users where login = :login and password_hash = :pass and role =-1" );
-                        query1.bindValue( ":id", imgId );
                         query1.bindValue(":login",name);
                         query1.bindValue(":pass", password);
                         if( !query1.exec( ))
                                 qDebug() << "Error getting image from table:\n" << query1.lastError();
-                        int userId=querry1.value(0).toInteger();
+                       aw->Userid=query1.value("id").toInt();
 
 
 

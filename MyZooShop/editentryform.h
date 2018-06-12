@@ -13,6 +13,7 @@ class editentryForm : public QWidget
     Q_OBJECT
 
 public:
+    int toEdit;
     explicit editentryForm(QWidget *parent = 0);
     ~editentryForm();
 

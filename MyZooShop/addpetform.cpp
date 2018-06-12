@@ -11,6 +11,7 @@ AddPetForm::AddPetForm(QWidget *parent) :
     ui->setupUi(this);
     ui->lineEdit_5->setVisible(false);
     ui->label_6->setVisible(false);
+    ownerId=-1;
 }
 
 AddPetForm::~AddPetForm()
@@ -39,7 +40,13 @@ void AddPetForm::on_pushButton_clicked()
         writeQry.bindValue(":species",ui->lineEdit_2->text());
         writeQry.bindValue(":name",ui->lineEdit_3->text());
         if(role==-1){
-         writeQry.bindValue(":owner",ownerId);
+            QSqlQuery query1;
+                query1.prepare( "SELECT MAX(id) from clients" );
+                if( !query1.exec( ))
+                        qDebug() << "Error getting image from table:\n" << query1.lastError();
+                clientId=query1.value(0).toInt()+1;
+                writeQry.bindValue(":owner",clientId);
+
         }
         else{
             writeQry.bindValue(":owner",ui->lineEdit_5->text());

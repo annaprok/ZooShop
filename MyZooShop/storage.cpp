@@ -9,7 +9,8 @@ Storage::Storage(int PORT, QHostAddress serverAddress)
 Storage::Storage()
 {
    this->PORT=3000;
-    this->serverAddress=(QHostAddress)"127.0.0.1";
+    this->serverAddress=QHostAddress("127.0.0.1");
+    c=new Client();
 }
 //QStringList Storage::getAllFilesNew() {
 //    Request req;
@@ -130,6 +131,34 @@ Storage::Storage()
 //    }
 //    return res.status;
 //}
+
+bool Storage::addAnimal(Animal*animal ) {
+    ZooRequest req;
+    req.functionName = ZooFuncName::FN_ADD_ANIMAL;
+    req.animal = *animal;
+    ZooResponse res;
+    QHostAddress serverAddress("127.0.0.1");
+    int status =c->sendZooRequest(req, res, PORT,serverAddress);
+    if (status != 0) {
+        cerr<<"Send request error //storage\n";
+        return false;
+    }
+    return true;
+}
+
+bool Storage::deleteAnimal(int id ) {
+    ZooRequest req;
+    req.functionName = ZooFuncName::FN_DELETE_ANIMAL;
+    req.id = id;
+    ZooResponse res;
+    QHostAddress serverAddress("127.0.0.1");
+    int status =c->sendZooRequest(req, res, PORT,serverAddress);
+    if (status != 0) {
+        cerr<<"Send request error //storage\n";
+        return false;
+    }
+    return true;
+}
 
 
 

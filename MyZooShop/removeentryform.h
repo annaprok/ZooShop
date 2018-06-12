@@ -12,6 +12,7 @@ class removeentryform : public QWidget
     Q_OBJECT
 
 public:
+    int toRemove;
     explicit removeentryform(QWidget *parent = 0);
     ~removeentryform();
 

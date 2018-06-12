@@ -12,6 +12,7 @@ class RemoveStaffForm : public QWidget
     Q_OBJECT
 
 public:
+    int toRemove;
     explicit RemoveStaffForm(QWidget *parent = 0);
     ~RemoveStaffForm();
 

@@ -12,6 +12,7 @@ class EditStaffForm : public QWidget
     Q_OBJECT
 
 public:
+    int toEdit;
     explicit EditStaffForm(QWidget *parent = 0);
     ~EditStaffForm();
 

@@ -43,7 +43,8 @@ SOURCES += main.cpp\
     removeclientform.cpp \
     removegoodsform.cpp \
     removestaffform.cpp \
-    addpetform.cpp
+    addpetform.cpp \
+    connectdatabase.cpp
 
 HEADERS  += mainwindow.h \
     autorisationwindow.h \

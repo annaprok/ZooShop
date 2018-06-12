@@ -12,6 +12,7 @@ class EditClientForm : public QWidget
     Q_OBJECT
 
 public:
+    int toEdit;
     explicit EditClientForm(QWidget *parent = 0);
     ~EditClientForm();
 

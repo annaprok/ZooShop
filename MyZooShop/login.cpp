@@ -123,7 +123,7 @@ void LogIn::on_loginButton_clicked()
     QString password=hashFunc(ui->editPassword->text());
 
     QSqlQuery query;
-    query.prepare("SELECT login,password_hash,role FROM users WHERE login = (:name) AND password_hash = (:pass)");
+    query.prepare("SELECT id,login,password_hash,role FROM users WHERE login = (:name) AND password_hash = (:pass)");
     query.bindValue(":name", ui->UsernameEdit->text());
     query.bindValue(":pass", password);
 
@@ -151,6 +151,7 @@ void LogIn::on_loginButton_clicked()
           }
           else if(status==-1){
               aw->role=-1;
+              aw->Userid=query.record().value("id").toInt();
               QMessageBox::information(this,"Login was succesful","Welcome!");
               aw->show();
 

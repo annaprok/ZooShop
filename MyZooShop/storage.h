@@ -34,6 +34,9 @@ public:
     int updateStudent(Composer * composer);
     int deleteStudent(int id);
     int deleteFile(QString file);
+    ///
+    bool addAnimal(Animal*animal);
+    bool deleteAnimal(int id );
 };
 
 #endif // STORAGE_H

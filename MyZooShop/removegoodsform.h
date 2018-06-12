@@ -12,6 +12,7 @@ class RemoveGoodsForm : public QWidget
     Q_OBJECT
 
 public:
+    int toRemove;
     explicit RemoveGoodsForm(QWidget *parent = 0);
     ~RemoveGoodsForm();
 
